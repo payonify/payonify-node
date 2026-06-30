@@ -1,19 +1,17 @@
-# @payonify/js
+# payonify
 
 Official Payonify Node.js SDK for interacting with the Payonify API.
 
 ## Installation
 
 ```bash
-npm install @payonify/js
-# or
-bun add @payonify/js
+bun add payonify
 ```
 
 ## Setup
 
 ```typescript
-import { Payonify } from "@payonify/js";
+import { Payonify } from "payonify";
 
 const payonify = new Payonify({
   publishableKey: "pk_test_...",
@@ -289,7 +287,7 @@ import {
   NotFoundError,
   ValidationError,
   RateLimitError,
-} from "@payonify/js";
+} from "payonify";
 
 try {
   await payonify.charges.retrieve("ch_...");
