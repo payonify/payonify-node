@@ -1,0 +1,51 @@
+{
+  "name": "payonify",
+  "version": "0.1.1",
+  "description": "Official Payonify Node.js SDK for the Payonify API",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "bun run clean && bun run build"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/payonify/payonify-node.git",
+    "directory": "packages/node"
+  },
+  "homepage": "https://docs.payonify.com",
+  "bugs": {
+    "url": "https://github.com/payonify/payonify-node/issues"
+  },
+  "keywords": [
+    "payonify",
+    "payments",
+    "mobile-money",
+    "ecocash",
+    "onemoney",
+    "checkout",
+    "api",
+    "sdk"
+  ],
+  "devDependencies": {
+    "typescript": "5.7.3"
+  },
+  "license": "MIT"
+}
