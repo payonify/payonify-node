@@ -10,6 +10,7 @@ export type {
   CheckoutSessionStatus,
   CheckoutSessionPaymentStatus,
   PayoutStatus,
+  TransferStatus,
   CancellationReason,
   SubmitType,
   PaymentMethodType,
@@ -57,3 +58,16 @@ export type {
   ValidatePayoutRecipientResponse,
   PayoutRecipient,
 } from "./resources/payouts.js";
+
+export type {
+  Transfer,
+  CreateTransferParams,
+  ListTransfersParams,
+  TransferDestination,
+  TransferDestinationDetails,
+  ValidateTransferRecipientParams,
+  ValidateTransferRecipientResponse,
+  TransferRecipient,
+  TransferBalance,
+  TransferBalanceEntry,
+} from "./resources/transfers.js";

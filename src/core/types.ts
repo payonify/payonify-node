@@ -28,6 +28,8 @@ export type CheckoutSessionPaymentStatus =
 
 export type PayoutStatus = "pending" | "paid" | "failed";
 
+export type TransferStatus = "pending" | "succeeded" | "failed";
+
 export type CancellationReason =
   | "duplicate"
   | "fraudulent"

@@ -1,6 +1,10 @@
-# payonify
+# Payonify Node.js Library
 
-Official Payonify Node.js SDK for interacting with the Payonify API.
+[![Version](https://img.shields.io/npm/v/payonify.svg)](https://www.npmjs.org/package/payonify)
+[![Build Status](https://github.com/payonify/payonify-node/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/payonify/payonify-node/actions?query=branch%3Amain)
+[![Downloads](https://img.shields.io/npm/dm/payonify.svg)](https://www.npmjs.com/package/payonify)
+
+The official Payonify client for Node.js and TypeScript - a fully typed way to work with the Payonify API from your server, covering charges, refunds, checkout sessions, payouts, and Relay transfers.
 
 ## Installation
 
@@ -274,6 +278,78 @@ for (const payout of result.data) {
 ```typescript
 const payout = await payonify.payouts.retrieve("po_...");
 console.log(payout.status);
+```
+
+## Transfers (Relay)
+
+Relay lets marketplaces and platforms collect with charges and pay out to recipients with `Transfer` objects, keeping a commission on each one. Transfers are paid from the funds you've collected.
+
+> **Note:** Relay must be enabled on your project.
+
+### Validate a transfer recipient
+
+The validate call takes `mobile_money` directly (no `destination` wrapper).
+
+```typescript
+const result = await payonify.transfers.validateRecipient({
+  mobile_money: {
+    ecocash: { mobile_number: "772111111" },
+  },
+});
+
+if (result.valid) {
+  console.log(result.recipient);
+}
+```
+
+### Create a transfer
+
+```typescript
+const transfer = await payonify.transfers.create({
+  amount: 5000,
+  currency: "usd",
+  application_fee_amount: 500, // your commission
+  destination: {
+    mobile_money: {
+      ecocash: { mobile_number: "772111111" },
+    },
+  },
+  description: "Driver payout - trip 8841",
+});
+
+console.log(transfer.status); // "pending"
+console.log(transfer.net_amount); // what the recipient receives, after fees
+```
+
+### Check your relay balance
+
+```typescript
+const balance = await payonify.transfers.balance();
+
+for (const pool of balance.balances) {
+  console.log(pool.provider, pool.currency, pool.available);
+}
+```
+
+### List all transfers
+
+```typescript
+const result = await payonify.transfers.list({
+  limit: 10,
+  status: "succeeded",
+  currency: "usd",
+});
+
+for (const transfer of result.data) {
+  console.log(transfer.id, transfer.status, transfer.net_amount);
+}
+```
+
+### Retrieve a transfer
+
+```typescript
+const transfer = await payonify.transfers.retrieve("tr_...");
+console.log(transfer.status);
 ```
 
 ## Error Handling

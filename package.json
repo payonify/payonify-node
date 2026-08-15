@@ -1,7 +1,7 @@
 {
   "name": "payonify",
-  "version": "0.1.3",
-  "description": "Official Payonify Node.js SDK for the Payonify API",
+  "version": "0.2.0",
+  "description": "The official Payonify client for Node.js and TypeScript",
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",
